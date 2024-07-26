@@ -150,13 +150,11 @@ recognition.onresult=function(event){
         readOut("activated sir");
         
     }
-    if(transcript.includes("tell me today's weather")){
-        readOut(weather(location));
-
-        
+    if(transcript.includes("open your commands")){
+        readOut("ok sir");
+       let a = window.open("http://127.0.0.1:5500/Project/commands.html");
+        windowsB.push(a)
     }
-    
-    
     if(transcript.includes("clear all information")){
         readOut("ok sir take it");
         localStorage.clear();
@@ -173,15 +171,20 @@ recognition.onresult=function(event){
     if(transcript.includes("hello, jarvis")){
         readOut("hello sir how may can i help you");
     }
+    
+    if(transcript.includes("shut down jarvis.")){
+        readOut("ok sir take it");
+        recognition.stop();
+    }
     if(transcript.includes("open youtube")||transcript.includes("opening youtube")){
         readOut("opening youtube sir");
       let a=  window.open("https://www.youtube.com/");
-      windowsB.push(a);
+      windowsB.push(a)
     }
     if(transcript.includes("open google")||transcript.includes("opening google")){
         readOut("opening google sir");
        let a= window.open("https://www.google.co.in/");
-       windowsB.push(a);
+       windowsB.push(a)
     }
     if(transcript.includes("please search")){
         readOut("here's the result");
@@ -191,7 +194,7 @@ recognition.onresult=function(event){
         input=input.join("").split(" ").join("+");
         console.log(input);
         let a= window.open(`https://www.google.co.in/search?q=${input}`);
-        windowsB.push(a);
+        windowsB.push(a)
     }
     if(transcript.includes("play")||transcript.includes("give me")){
         readOut("ok sir");
@@ -206,13 +209,13 @@ recognition.onresult=function(event){
      if(transcript.includes("please open my insta profile")){
         readOut("opening your insta profile sir");
        let a= window.open(`https://www.instagram.com/${JSON.parse(userdata).Instagram}/`);
-       windowsB.push(a);
+       windowsB.push(a)
     }
     //https://github.com/Subhojit-cloude
     if(transcript.includes("please open my github profile")){
         readOut("opening your github profile sir");
         let a=window.open(`https://github.com/${JSON.parse(userdata).github}/`);
-        windowsB.push(a);
+        windowsB.push(a)
     }
     if(transcript.includes("what are your commands")){
         readOut("i followed the following commands");
@@ -230,13 +233,6 @@ recognition.onresult=function(event){
        
     };
 
-    
-
-    
-    
-   
-
-    
 //for end
 recognition.onend=function(){
     console.log(" deactive");
@@ -245,7 +241,7 @@ recognition.onend=function(){
 
 
 //for it continuous
-//recognition.continuous=true;
+recognition.continuous=true;
 
 clickBtn.addEventListener("click",()=>{
     recognition.start();
@@ -288,7 +284,7 @@ function wishMe(){
 }
 wishMe();
 
-
+//for news
 async function getNews(){
     var url="https://newsapi.org/v2/top-headlines?country=in&apiKey=b0712dc2e5814a1bb531e6f096b3d7d3"
     var req=new Request(url)
@@ -296,7 +292,7 @@ async function getNews(){
     .then((data) => {
         console.log(data);
         let arrNews = data.articles
-        arrNews.length = 10
+        //arrNews.length = 10
         let a = []
          arrNews.forEach((e,index) => {
             a.push(index+1)
